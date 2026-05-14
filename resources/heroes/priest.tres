@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="HeroData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/resources/HeroData.gd" id="1_herodat"]
+
+[resource]
+script = ExtResource("1_herodat")
+id = "priest"
+display_name = "성직자"
+scene_path = "res://scenes/game/units/heroes/Priest.tscn"
+damage = 8.0
+attack_speed = 0.5
+attack_range = 0.0
+description = "주기적으로 성 HP 회복"

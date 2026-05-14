@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/resources/EnemyData.gd" id="1_enemdat"]
+
+[resource]
+script = ExtResource("1_enemdat")
+id = "boss_stage1"
+display_name = "Stage 1 보스"
+scene_path = "res://scenes/game/enemies/Boss.tscn"
+max_hp = 500.0
+move_speed = 60.0
+damage = 20.0
+attack_range = 65.0
+xp_reward = 20
+is_ranged = false
+attack_interval = 1.5
+projectile_speed = 200.0

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="FacilityData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/resources/FacilityData.gd" id="1_facdat"]
+
+[resource]
+script = ExtResource("1_facdat")
+id = "crossbow"
+display_name = "석궁 포탑"
+scene_path = "res://scenes/game/units/facilities/Crossbow.tscn"
+damage = 8.0
+attack_speed = 1.8
+attack_range = 200.0
+description = "빠른 단일 원거리 공격"
+max_level = 3

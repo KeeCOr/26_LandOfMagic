@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="FacilityData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/resources/FacilityData.gd" id="1_facdat"]
+
+[resource]
+script = ExtResource("1_facdat")
+id = "spike_fence"
+display_name = "가시 방벽"
+scene_path = "res://scenes/game/units/facilities/SpikeFence.tscn"
+damage = 6.0
+attack_speed = 2.0
+attack_range = 60.0
+description = "근접 적에게 지속 데미지"
+max_level = 3

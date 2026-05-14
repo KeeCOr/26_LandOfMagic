@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="FacilityData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/resources/FacilityData.gd" id="1_facdat"]
+
+[resource]
+script = ExtResource("1_facdat")
+id = "catapult"
+display_name = "화염 투석기"
+scene_path = "res://scenes/game/units/facilities/Catapult.tscn"
+damage = 25.0
+attack_speed = 0.4
+attack_range = 280.0
+description = "느리지만 강력한 투석기"
+max_level = 3

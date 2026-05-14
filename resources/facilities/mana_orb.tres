@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="FacilityData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/resources/FacilityData.gd" id="1_facdat"]
+
+[resource]
+script = ExtResource("1_facdat")
+id = "mana_orb"
+display_name = "마나 오브"
+scene_path = "res://scenes/game/units/facilities/ManaOrb.tscn"
+damage = 0.0
+attack_speed = 1.0
+attack_range = 0.0
+description = "주기적으로 소량 경험치 생성"
+max_level = 3

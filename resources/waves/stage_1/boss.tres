@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="WaveData" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/resources/WaveData.gd" id="1_wdat"]
+[ext_resource type="Resource" path="res://resources/enemies/boss_stage1.tres" id="2_boss"]
+[ext_resource type="Resource" path="res://resources/enemies/goblin.tres" id="3_gobl"]
+
+[resource]
+script = ExtResource("1_wdat")
+wave_number = 4
+duration = 120.0
+spawn_interval = 5.0
+max_enemies_at_once = 10
+is_boss_wave = true
+enemy_pool = Array[ExtResource("2_boss"), ExtResource("3_gobl")]
+spawn_weights = PackedFloat32Array(0.2, 0.8)

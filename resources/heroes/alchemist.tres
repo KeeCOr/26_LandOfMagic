@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="HeroData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/resources/HeroData.gd" id="1_herodat"]
+
+[resource]
+script = ExtResource("1_herodat")
+id = "alchemist"
+display_name = "연금술사"
+scene_path = "res://scenes/game/units/heroes/Alchemist.tscn"
+damage = 5.0
+attack_speed = 0.3
+attack_range = 0.0
+description = "주기적으로 골드 생성"

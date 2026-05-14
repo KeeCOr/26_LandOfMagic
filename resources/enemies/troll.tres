@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/resources/EnemyData.gd" id="1_enemdat"]
+
+[resource]
+script = ExtResource("1_enemdat")
+id = "troll"
+display_name = "트롤"
+scene_path = "res://scenes/game/enemies/Troll.tscn"
+max_hp = 150.0
+move_speed = 45.0
+damage = 18.0
+attack_range = 65.0
+xp_reward = 5
+is_ranged = false
+attack_interval = 2.0
+projectile_speed = 200.0
