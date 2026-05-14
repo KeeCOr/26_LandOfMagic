@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -L \"https://github.com/bitwes/Gut/releases/download/v9.3.0/gut_v9.3.0.zip\" -o /tmp/gut.zip)",
+      "Bash(curl -s \"https://api.github.com/repos/bitwes/Gut/releases/latest\")",
+      "Bash(python3 -c \"import sys,json; data=json.load\\(sys.stdin\\); [print\\(a[''''browser_download_url'''']\\) for a in data.get\\(''''assets'''',[]\\)]\")",
+      "Bash(curl -sL \"https://api.github.com/repos/bitwes/Gut/releases/latest\")",
+      "Bash(curl -L \"https://api.github.com/repos/bitwes/Gut/zipball/v9.6.0\" -o /tmp/gut_source.zip)",
+      "Bash(unzip -q gut_source.zip)",
+      "Bash(where godot:*)",
+      "Bash(where godot4:*)",
+      "Read(//c/Program Files/**)",
+      "Read(//c/Program Files \\(x86\\)/**)",
+      "Read(//c/Users/**)"
+    ]
+  }
+}
