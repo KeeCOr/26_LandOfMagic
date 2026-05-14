@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://castle0001"]
+
+[ext_resource type="Script" path="res://scenes/game/castle/Castle.gd" id="1_castle1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
+size = Vector2(80, 80)
+
+[node name="Castle" type="CharacterBody2D"]
+collision_layer = 1
+collision_mask = 2
+script = ExtResource("1_castle1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="SlotsContainer" type="Node2D" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+enabled = true
+position_smoothing_enabled = true
