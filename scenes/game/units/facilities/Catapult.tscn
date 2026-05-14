@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://catapult1"]
+
+[ext_resource type="PackedScene" uid="uid://facility001" path="res://scenes/game/units/Facility.tscn" id="1_cata01"]
+[ext_resource type="Script" path="res://scenes/game/units/facilities/Catapult.gd" id="2_cata02"]
+
+[node name="Catapult" instance=ExtResource("1_cata01")]
+script = ExtResource("2_cata02")

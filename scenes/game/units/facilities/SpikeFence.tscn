@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://spikefnc1"]
+
+[ext_resource type="PackedScene" uid="uid://facility001" path="res://scenes/game/units/Facility.tscn" id="1_spkf01"]
+[ext_resource type="Script" path="res://scenes/game/units/facilities/SpikeFence.gd" id="2_spkf02"]
+
+[node name="SpikeFence" instance=ExtResource("1_spkf01")]
+script = ExtResource("2_spkf02")
