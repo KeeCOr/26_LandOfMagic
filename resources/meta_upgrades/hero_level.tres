@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="MetaUpgradeData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/resources/MetaUpgradeData.gd" id="1_mupg"]
+
+[resource]
+script = ExtResource("1_mupg")
+id = "hero_level"
+display_name = "영웅 초기 레벨"
+description = "영웅 획득 시 레벨 +1로 시작"
+cost = 200
+max_level = 3
+upgrade_type = "hero_level"
+value_per_level = 1.0

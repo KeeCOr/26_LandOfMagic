@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="MetaUpgradeData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/resources/MetaUpgradeData.gd" id="1_mupg"]
+
+[resource]
+script = ExtResource("1_mupg")
+id = "slot_count"
+display_name = "슬롯 확장"
+description = "성 내부 슬롯 1개 추가"
+cost = 150
+max_level = 4
+upgrade_type = "slot_count"
+value_per_level = 1.0
