@@ -41,6 +41,10 @@ move_down={
 ]
 }
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/gut/plugin.cfg")
+
 [rendering]
 
 renderer/rendering_method="forward_plus"
