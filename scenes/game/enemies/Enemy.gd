@@ -2,6 +2,8 @@
 class_name Enemy
 extends CharacterBody2D
 
+const Art = preload("res://scripts/ArtLibrary.gd")
+
 @export var enemy_data: EnemyData
 
 var hp: float = 0.0
@@ -9,12 +11,15 @@ var castle_ref: Node2D = null
 var attack_timer: float = 0.0
 
 @onready var health_bar: ProgressBar = $HealthBar
+@onready var sprite: Sprite2D = $Sprite2D
 
 signal died(enemy: Enemy, xp_amount: int)
 
 func _ready() -> void:
 	if enemy_data:
 		hp = enemy_data.max_hp
+		Art.apply_data_sprite(sprite, enemy_data, Art.ENEMY_ART)
+		sprite.position = Vector2(0, -16)
 		if health_bar:
 			health_bar.max_value = enemy_data.max_hp
 			health_bar.value = hp

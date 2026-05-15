@@ -2,14 +2,18 @@
 class_name Castle
 extends CharacterBody2D
 
+const Art = preload("res://scripts/ArtLibrary.gd")
 const SPEED = 120.0
 
 @onready var slots_container: Node2D = $SlotsContainer
+@onready var sprite: Sprite2D = $Sprite2D
 
 var slots: Array = []
 
 func _ready() -> void:
 	GameState.castle_hp = GameState.castle_max_hp
+	Art.apply_sprite(sprite, Art.ENVIRONMENT_ART["mansion"])
+	sprite.position = Vector2(0, -38)
 	_setup_slots()
 
 func _physics_process(_delta: float) -> void:

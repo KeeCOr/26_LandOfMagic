@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_facdat")
 id = "crossbow"
-display_name = "석궁 포탑"
+display_name = "연발 쇠뇌"
 scene_path = "res://scenes/game/units/facilities/Crossbow.tscn"
 damage = 8.0
 attack_speed = 1.8

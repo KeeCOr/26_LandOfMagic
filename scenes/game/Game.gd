@@ -2,6 +2,8 @@
 class_name Game
 extends Node2D
 
+const Art = preload("res://scripts/ArtLibrary.gd")
+
 @onready var castle: Castle = $Castle
 @onready var wave_manager: WaveManager = $WaveManager
 @onready var enemy_container: Node2D = $EnemyContainer
@@ -14,11 +16,31 @@ var total_waves: int = 0
 
 func _ready() -> void:
 	GameState.reset_run()
+	_setup_stage_art()
 	_load_unit_pools()
 	_connect_signals()
 	wave_manager.init(castle, enemy_container)
 	total_waves = wave_manager.wave_data_list.size()
 	wave_manager.start_next_wave()
+
+func _setup_stage_art() -> void:
+	var bg := Sprite2D.new()
+	bg.name = "BattlefieldBackdrop"
+	bg.texture = Art.texture(Art.ENVIRONMENT_ART["battlefield"])
+	bg.centered = true
+	bg.position = Vector2(0, 0)
+	bg.z_index = -100
+	add_child(bg)
+	move_child(bg, 0)
+
+	var vignette := CanvasLayer.new()
+	vignette.name = "MoodOverlay"
+	vignette.layer = -1
+	add_child(vignette)
+	var shade := ColorRect.new()
+	shade.color = Color(0.07, 0.08, 0.1, 0.16)
+	shade.set_anchors_preset(Control.PRESET_FULL_RECT)
+	vignette.add_child(shade)
 
 func _load_unit_pools() -> void:
 	GameState.hero_pool.clear()

@@ -10,4 +10,4 @@ scene_path = "res://scenes/game/units/heroes/Mage.tscn"
 damage = 18.0
 attack_speed = 0.7
 attack_range = 250.0
-description = "느리지만 광역 마법 공격"
+description = "느리지만 강한 광역 마법 공격"

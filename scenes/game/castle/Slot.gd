@@ -2,11 +2,19 @@
 class_name Slot
 extends Node2D
 
+const Art = preload("res://scripts/ArtLibrary.gd")
+
 var slot_index: int = 0
 var unit_data = null
 var unit_node: Node = null
 
 @onready var unit_container: Node2D = $UnitContainer
+@onready var sprite: Sprite2D = $Sprite2D
+
+func _ready() -> void:
+	Art.apply_sprite(sprite, Art.ENVIRONMENT_ART["slot"])
+	sprite.z_index = -1
+	unit_container.position = Vector2(0, -18)
 
 func set_unit(data) -> void:
 	if is_instance_valid(unit_node):

@@ -2,6 +2,8 @@
 class_name Facility
 extends Node2D
 
+const Art = preload("res://scripts/ArtLibrary.gd")
+
 var unit_data: FacilityData = null
 var facility_level: int = 1
 var current_target: Enemy = null
@@ -10,12 +12,15 @@ var nearby_enemies: Array = []
 
 @onready var detection_area: Area2D = $DetectionArea
 @onready var detection_shape: CollisionShape2D = $DetectionArea/CollisionShape2D
+@onready var sprite: Sprite2D = $Sprite2D
 
 func _ready() -> void:
 	if unit_data:
 		var shape = CircleShape2D.new()
 		shape.radius = unit_data.attack_range
 		detection_shape.shape = shape
+		Art.apply_data_sprite(sprite, unit_data, Art.FACILITY_ART)
+		sprite.position = Vector2(0, -14)
 	detection_area.body_entered.connect(_on_body_entered)
 	detection_area.body_exited.connect(_on_body_exited)
 

@@ -2,6 +2,8 @@
 class_name Hero
 extends Node2D
 
+const Art = preload("res://scripts/ArtLibrary.gd")
+
 var unit_data: HeroData = null
 var hero_level: int = 1
 var current_target: Enemy = null
@@ -10,6 +12,7 @@ var nearby_enemies: Array = []
 
 @onready var detection_area: Area2D = $DetectionArea
 @onready var detection_shape: CollisionShape2D = $DetectionArea/CollisionShape2D
+@onready var sprite: Sprite2D = $Sprite2D
 
 func _ready() -> void:
 	if unit_data:
@@ -22,6 +25,8 @@ func _apply_data() -> void:
 	var shape = CircleShape2D.new()
 	shape.radius = unit_data.attack_range
 	detection_shape.shape = shape
+	Art.apply_data_sprite(sprite, unit_data, Art.HERO_ART)
+	sprite.position = Vector2(0, -18)
 
 func _physics_process(delta: float) -> void:
 	if not unit_data:

@@ -10,4 +10,4 @@ scene_path = "res://scenes/game/units/heroes/Alchemist.tscn"
 damage = 5.0
 attack_speed = 0.3
 attack_range = 0.0
-description = "주기적으로 골드 생성"
+description = "주기적으로 골드를 생산"

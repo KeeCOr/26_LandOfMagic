@@ -10,4 +10,4 @@ scene_path = "res://scenes/game/units/heroes/Knight.tscn"
 damage = 20.0
 attack_speed = 0.9
 attack_range = 70.0
-description = "근접 방어 전사"
+description = "가까운 적을 막아서는 근접 전사"

@@ -10,4 +10,4 @@ scene_path = "res://scenes/game/units/heroes/Priest.tscn"
 damage = 8.0
 attack_speed = 0.5
 attack_range = 0.0
-description = "주기적으로 성 HP 회복"
+description = "주기적으로 성의 HP를 회복"

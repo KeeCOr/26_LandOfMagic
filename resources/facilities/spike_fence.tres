@@ -10,5 +10,5 @@ scene_path = "res://scenes/game/units/facilities/SpikeFence.tscn"
 damage = 6.0
 attack_speed = 2.0
 attack_range = 60.0
-description = "근접 적에게 지속 데미지"
+description = "가까운 적에게 지속 피해"
 max_level = 3

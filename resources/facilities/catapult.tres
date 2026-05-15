@@ -10,5 +10,5 @@ scene_path = "res://scenes/game/units/facilities/Catapult.tscn"
 damage = 25.0
 attack_speed = 0.4
 attack_range = 280.0
-description = "느리지만 강력한 투석기"
+description = "느리지만 강력한 범위 포격"
 max_level = 3

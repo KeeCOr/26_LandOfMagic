@@ -10,5 +10,5 @@ scene_path = "res://scenes/game/units/facilities/ManaOrb.tscn"
 damage = 0.0
 attack_speed = 1.0
 attack_range = 0.0
-description = "주기적으로 소량 경험치 생성"
+description = "주기적으로 소량의 경험치를 생성"
 max_level = 3

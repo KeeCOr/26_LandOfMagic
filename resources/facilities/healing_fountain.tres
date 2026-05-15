@@ -5,10 +5,10 @@
 [resource]
 script = ExtResource("1_facdat")
 id = "healing_fountain"
-display_name = "치료 분수"
+display_name = "치유 분수"
 scene_path = "res://scenes/game/units/facilities/HealingFountain.tscn"
 damage = 5.0
 attack_speed = 0.5
 attack_range = 0.0
-description = "주기적으로 성 HP 회복"
+description = "주기적으로 성의 HP를 회복"
 max_level = 3

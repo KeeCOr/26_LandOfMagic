@@ -2,10 +2,14 @@
 class_name Projectile
 extends Area2D
 
+const Art = preload("res://scripts/ArtLibrary.gd")
+
 var damage: float = 0.0
 var speed: float = 300.0
 var direction: Vector2 = Vector2.RIGHT
 var target: Node2D = null
+
+@onready var sprite: Sprite2D = $Sprite2D
 
 func init(dmg: float, spd: float, dir: Vector2, tgt: Node2D = null) -> void:
 	damage = dmg
@@ -14,11 +18,13 @@ func init(dmg: float, spd: float, dir: Vector2, tgt: Node2D = null) -> void:
 	target = tgt
 
 func _ready() -> void:
+	Art.apply_sprite(sprite, Art.ENVIRONMENT_ART["projectile"])
 	body_entered.connect(_on_body_entered)
 
 func _physics_process(delta: float) -> void:
 	if is_instance_valid(target):
 		direction = (target.global_position - global_position).normalized()
+	rotation = direction.angle()
 	global_position += direction * speed * delta
 	var cam_pos = Vector2.ZERO
 	var cam = get_viewport().get_camera_2d()
