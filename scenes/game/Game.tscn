@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://game00001"]
+[gd_scene load_steps=13 format=3 uid="uid://game00001"]
 
 [ext_resource type="Script" path="res://scenes/game/Game.gd" id="1_game1"]
 [ext_resource type="PackedScene" uid="uid://castle0001" path="res://scenes/game/castle/Castle.tscn" id="2_castl"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://hud000001" path="res://scenes/ui/HUD.tscn" id="4_hud"]
 [ext_resource type="PackedScene" uid="uid://leveluppop1" path="res://scenes/ui/LevelUpPopup.tscn" id="5_lvlup"]
 [ext_resource type="PackedScene" uid="uid://waveint001" path="res://scenes/ui/WaveIntermission.tscn" id="6_wint"]
+[ext_resource type="PackedScene" uid="uid://resultscr1" path="res://scenes/ui/ResultScreen.tscn" id="11_rslt"]
 [ext_resource type="Resource" path="res://resources/waves/stage_1/wave_1.tres" id="7_wv1"]
 [ext_resource type="Resource" path="res://resources/waves/stage_1/wave_2.tres" id="8_wv2"]
 [ext_resource type="Resource" path="res://resources/waves/stage_1/wave_3.tres" id="9_wv3"]
@@ -26,3 +27,5 @@ wave_data_list = [ExtResource("7_wv1"), ExtResource("8_wv2"), ExtResource("9_wv3
 [node name="LevelUpPopup" parent="." instance=ExtResource("5_lvlup")]
 
 [node name="WaveIntermission" parent="." instance=ExtResource("6_wint")]
+
+[node name="ResultScreen" parent="." instance=ExtResource("11_rslt")]

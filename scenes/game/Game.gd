@@ -8,6 +8,7 @@ extends Node2D
 @onready var hud: HUD = $HUD
 @onready var levelup_popup: LevelUpPopup = $LevelUpPopup
 @onready var wave_intermission: WaveIntermission = $WaveIntermission
+@onready var result_screen = $ResultScreen
 
 var total_waves: int = 0
 
@@ -51,6 +52,7 @@ func _connect_signals() -> void:
 	GameState.castle_died.connect(_on_castle_died)
 	levelup_popup.choice_made.connect(_on_choice_made)
 	wave_intermission.intermission_done.connect(_on_intermission_done)
+	result_screen.continue_pressed.connect(_on_result_continue)
 
 func _on_wave_started(wave_number: int) -> void:
 	hud.set_wave(wave_number, total_waves)
@@ -66,9 +68,12 @@ func _on_all_waves_cleared() -> void:
 	if not (GameState.current_stage + 1) in SaveData.unlocked_stages:
 		SaveData.unlocked_stages.append(GameState.current_stage + 1)
 	SaveData.save()
-	get_tree().change_scene_to_file("res://scenes/main_menu/MainMenu.tscn")
+	result_screen.show_victory(GameState.current_stage, gold_reward)
 
 func _on_castle_died() -> void:
+	result_screen.show_defeat(GameState.current_stage, wave_manager.current_wave_index + 1)
+
+func _on_result_continue() -> void:
 	get_tree().change_scene_to_file("res://scenes/main_menu/MainMenu.tscn")
 
 func _on_choice_made(data) -> void:

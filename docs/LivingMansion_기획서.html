@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Living Mansion (LM) 기획서</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', -apple-system, sans-serif; background: #1a1a2e; color: #e0e0e0; line-height: 1.7; padding: 40px 20px; }
+  .container { max-width: 900px; margin: 0 auto; }
+  h1 { color: #ff6b6b; font-size: 2.2em; margin-bottom: 10px; border-bottom: 3px solid #ff6b6b; padding-bottom: 10px; }
+  h2 { color: #4ecdc4; font-size: 1.5em; margin-top: 40px; margin-bottom: 15px; border-left: 4px solid #4ecdc4; padding-left: 12px; }
+  h3 { color: #ffe66d; font-size: 1.15em; margin-top: 25px; margin-bottom: 10px; }
+  .meta { color: #888; font-size: 0.9em; margin-bottom: 30px; }
+  .meta span { display: inline-block; margin-right: 20px; }
+  .meta strong { color: #aaa; }
+  p { margin-bottom: 12px; }
+  ul, ol { margin-left: 25px; margin-bottom: 12px; }
+  li { margin-bottom: 4px; }
+  table { width: 100%; border-collapse: collapse; margin: 15px 0; background: #16213e; border-radius: 8px; overflow: hidden; }
+  th { background: #0f3460; color: #e94560; padding: 10px 14px; text-align: left; font-weight: 600; }
+  td { padding: 8px 14px; border-top: 1px solid #1a1a3e; }
+  tr:hover td { background: #1a2a5e; }
+  code { background: #0f3460; color: #4ecdc4; padding: 2px 6px; border-radius: 4px; font-size: 0.9em; }
+  pre { background: #0f3460; color: #e0e0e0; padding: 16px; border-radius: 8px; margin: 15px 0; overflow-x: auto; font-size: 0.9em; line-height: 1.5; }
+  .flow-box { background: #16213e; border: 1px solid #0f3460; border-radius: 8px; padding: 20px; margin: 15px 0; text-align: center; font-size: 0.95em; }
+  .flow-box .arrow { color: #e94560; font-weight: bold; }
+  .badge { display: inline-block; background: #e94560; color: #fff; padding: 2px 8px; border-radius: 12px; font-size: 0.8em; margin-left: 6px; }
+  .section { margin-bottom: 30px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>Living Mansion (LM) 기획서</h1>
+<div class="meta">
+  <span><strong>버전:</strong> v0.1.0</span>
+  <span><strong>최종 수정:</strong> 2026-05-15</span>
+  <span><strong>엔진:</strong> Godot 4.3</span>
+  <span><strong>장르:</strong> 뱀서라이크 + 성 디펜스</span>
+</div>
+
+<div class="section">
+<h2>1. 컨셉 요약</h2>
+<p>살아 움직이는 성(Living Mansion)을 조종하며 사방에서 몰려오는 적을 처치하는 뱀서라이크 게임. 플레이어는 성의 이동 방향을 조종하고, 성 내부 슬롯에 영웅과 시설을 배치해 자동 전투를 수행한다. 스테이지를 클리어하며 메타 영구 업그레이드로 성을 강화해 나간다.</p>
+</div>
+
+<div class="section">
+<h2>2. 핵심 게임 루프</h2>
+<div class="flow-box">
+  [홈 화면] <span class="arrow">&rarr;</span> 스테이지 선택 <span class="arrow">&rarr;</span> [배치 화면] <span class="arrow">&rarr;</span> 전투 시작<br><br>
+  <span class="arrow">&darr;</span><br><br>
+  [전투 (탑뷰)] <span class="arrow">&rarr;</span> 레벨업 시 [3선택 팝업] <span class="arrow">&rarr;</span> 웨이브 클리어 시 [정비 화면]<br><br>
+  <span class="arrow">&darr;</span><br><br>
+  보스 처치 <span class="arrow">&rarr;</span> [보상 화면] <span class="arrow">&rarr;</span> 메타 업그레이드
+</div>
+
+<h3>화면 흐름</h3>
+<table>
+<tr><th>화면</th><th>설명</th></tr>
+<tr><td>MainMenu</td><td>게임 시작, 업그레이드, 종료</td></tr>
+<tr><td>StageSelect</td><td>스테이지 선택 (잠금 해제 기반)</td></tr>
+<tr><td>PlacementScreen</td><td>전투 전 영웅/시설 슬롯 배치</td></tr>
+<tr><td>Game (전투)</td><td>탑뷰 자동 전투, WASD 이동</td></tr>
+<tr><td>LevelUpPopup</td><td>레벨업 시 3선택지 (전투 일시정지)</td></tr>
+<tr><td>WaveIntermission</td><td>웨이브 사이 정비 시간 (15초 자동 시작)</td></tr>
+<tr><td>ResultScreen</td><td>스테이지 클리어/게임 오버 결과</td></tr>
+<tr><td>MetaScreen</td><td>영구 업그레이드 구매</td></tr>
+</table>
+</div>
+
+<div class="section">
+<h2>3. 스테이지 구성</h2>
+<ul>
+<li>스테이지당 <strong>3~5 웨이브 + 보스 웨이브</strong></li>
+<li>웨이브 진행에 따라 적 밀도와 종류 증가</li>
+<li>스테이지 클리어 시 다음 스테이지 잠금 해제</li>
+<li>런 실패 시 해당 스테이지 처음부터 재시작 (메타 업그레이드는 유지)</li>
+</ul>
+
+<h3>Stage 1 웨이브 구성</h3>
+<table>
+<tr><th>웨이브</th><th>시간</th><th>스폰 간격</th><th>적 구성</th><th>최대 동시 적</th></tr>
+<tr><td>Wave 1</td><td>35초</td><td>2.5초</td><td>고블린 100%</td><td>15</td></tr>
+<tr><td>Wave 2</td><td>40초</td><td>2.0초</td><td>고블린 70% + 오크 30%</td><td>18</td></tr>
+<tr><td>Wave 3</td><td>45초</td><td>1.5초</td><td>고블린 50% + 오크 30% + 고블린궁수 20%</td><td>20</td></tr>
+<tr><td>Boss</td><td>120초</td><td>5.0초</td><td>보스 20% + 고블린 80%</td><td>10</td></tr>
+</table>
+</div>
+
+<div class="section">
+<h2>4. 성 &amp; 슬롯 시스템</h2>
+<h3>4.1 성 구조</h3>
+<ul>
+<li>탑뷰에서 WASD로 이동하는 거대 유닛 (속도: 120)</li>
+<li>내부에 <strong>선형으로 나열된 슬롯</strong> 존재</li>
+<li>기본 슬롯: <strong>3개</strong>, 메타 업그레이드로 최대 <strong>6~7개</strong></li>
+<li>성 전체 HP가 0이 되면 게임 오버</li>
+</ul>
+
+<h3>4.2 슬롯 규칙</h3>
+<ul>
+<li>각 슬롯에 영웅 또는 시설 중 하나 배치</li>
+<li>빈 슬롯은 전투에 기여하지 않음</li>
+<li>슬롯 추가는 메타 업그레이드에서만 가능</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>5. 영웅 시스템</h2>
+<table>
+<tr><th>영웅</th><th>역할</th><th>데미지</th><th>공격속도</th><th>사거리</th><th>특성</th></tr>
+<tr><td>궁수 (Archer)</td><td>단일 원거리</td><td>12</td><td>1.2/초</td><td>220</td><td>빠른 공격, 투사체 발사</td></tr>
+<tr><td>마법사 (Mage)</td><td>광역 원거리</td><td>18</td><td>0.7/초</td><td>250</td><td>최대 5체 동시 공격 (70%)</td></tr>
+<tr><td>기사 (Knight)</td><td>근접 방어</td><td>20</td><td>0.9/초</td><td>70</td><td>투사체 없이 직접 타격</td></tr>
+<tr><td>성직자 (Priest)</td><td>지원 힐</td><td>8 (힐량)</td><td>0.5/초</td><td>-</td><td>성 HP 회복</td></tr>
+<tr><td>연금술사 (Alchemist)</td><td>자원 생성</td><td>5 (골드)</td><td>0.3/초</td><td>-</td><td>주기적 골드 생성</td></tr>
+</table>
+
+<h3>영웅 성장</h3>
+<ul>
+<li>레벨업 선택지에서 업그레이드 가능</li>
+<li>레벨당 데미지 +15%, 사거리 +5%</li>
+<li>메타 업그레이드로 초기 레벨 보정 가능</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>6. 시설 시스템</h2>
+<table>
+<tr><th>시설</th><th>역할</th><th>데미지</th><th>공격속도</th><th>사거리</th><th>최대 레벨</th></tr>
+<tr><td>석궁 포탑 (Crossbow)</td><td>단일 원거리</td><td>8</td><td>1.8/초</td><td>200</td><td>3</td></tr>
+<tr><td>화염 투석기 (Catapult)</td><td>광역 원거리</td><td>25</td><td>0.4/초</td><td>280</td><td>3</td></tr>
+<tr><td>가시 방벽 (SpikeFence)</td><td>근접 반사</td><td>6</td><td>2.0/초</td><td>60</td><td>3</td></tr>
+<tr><td>치료 분수 (HealingFountain)</td><td>성 힐</td><td>5 (힐)</td><td>0.5/초</td><td>-</td><td>3</td></tr>
+<tr><td>마나 오브 (ManaOrb)</td><td>경험치 버프</td><td>-</td><td>1.0/초</td><td>-</td><td>3</td></tr>
+</table>
+
+<h3>시설 업그레이드</h3>
+<ul>
+<li>레벨당 데미지 +20%</li>
+<li>최대 3레벨까지 업그레이드</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>7. 전투 시스템</h2>
+<h3>7.1 성 이동</h3>
+<ul>
+<li><strong>WASD / 방향키</strong>로 이동 방향 조종</li>
+<li>일정 속도(120)로 즉각 반응 이동</li>
+<li>적과 충돌 시 성이 데미지를 받음</li>
+</ul>
+
+<h3>7.2 자동 공격</h3>
+<ul>
+<li>배치된 영웅/시설이 사거리 내 적을 자동 타겟팅</li>
+<li>기본 타겟팅: 가장 가까운 적</li>
+</ul>
+
+<h3>7.3 레벨업 시스템</h3>
+<ul>
+<li>적 처치 시 경험치 획득 (xp_bonus 메타 업그레이드로 보정)</li>
+<li>레벨업 시 <strong>전투 일시정지 + 3선택지</strong> 팝업</li>
+<li>필요 경험치: 10부터 시작, 레벨당 x1.2 증가</li>
+</ul>
+
+<h3>7.4 웨이브 사이 정비</h3>
+<ul>
+<li>웨이브 클리어 후 <strong>15초</strong> 정비 시간 (자동 시작)</li>
+<li>웨이브 클리어 보상: 골드 +50</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>8. 적 시스템</h2>
+<table>
+<tr><th>적</th><th>HP</th><th>이동속도</th><th>데미지</th><th>사거리</th><th>경험치</th><th>특성</th></tr>
+<tr><td>고블린</td><td>20</td><td>120</td><td>4</td><td>55</td><td>1</td><td>빠르고 약함</td></tr>
+<tr><td>오크 전사</td><td>80</td><td>55</td><td>12</td><td>60</td><td>3</td><td>느리고 강함</td></tr>
+<tr><td>고블린 궁수</td><td>25</td><td>70</td><td>6</td><td>250</td><td>2</td><td>원거리 투사체</td></tr>
+<tr><td>트롤</td><td>150</td><td>45</td><td>18 (x1.5)</td><td>65</td><td>5</td><td>광역 1.5배</td></tr>
+<tr><td>보스 (S1)</td><td>500</td><td>60</td><td>20</td><td>65</td><td>20</td><td>HP 50% 이하 시 속도 1.5배</td></tr>
+</table>
+
+<h3>스폰 방식</h3>
+<ul>
+<li>성 위치 기준 500~600 거리의 랜덤 방향에서 스폰</li>
+<li>가중치 기반 랜덤 적 선택</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>9. 메타 영구 업그레이드</h2>
+<p>스테이지 클리어 골드(200G)로 구매. 런 간 영구 유지.</p>
+<table>
+<tr><th>업그레이드</th><th>효과</th><th>비용</th><th>최대 레벨</th><th>레벨당 효과</th></tr>
+<tr><td>슬롯 확장</td><td>슬롯 +1</td><td>150G</td><td>3</td><td>+1 슬롯</td></tr>
+<tr><td>성 HP 강화</td><td>최대 HP 증가</td><td>100G</td><td>3</td><td>+10 HP</td></tr>
+<tr><td>초기 골드</td><td>시작 골드 증가</td><td>80G</td><td>3</td><td>+50G</td></tr>
+<tr><td>영웅 초기 레벨</td><td>영웅 시작 레벨 +1</td><td>200G</td><td>3</td><td>+1 레벨</td></tr>
+<tr><td>경험치 보너스</td><td>적 처치 경험치 증가</td><td>120G</td><td>3</td><td>+10%</td></tr>
+<tr><td>시설 할인</td><td>시설 비용 감소</td><td>100G</td><td>3</td><td>-10%</td></tr>
+</table>
+</div>
+
+<div class="section">
+<h2>10. 세이브 시스템</h2>
+<ul>
+<li>저장 경로: <code>user://lm_save.json</code></li>
+<li>저장 항목: 메타 업그레이드 레벨, 해금된 스테이지, 보유 골드</li>
+<li>업그레이드 구매 시 자동 저장</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>11. 기술 구조</h2>
+<h3>오토로드</h3>
+<table>
+<tr><th>이름</th><th>역할</th></tr>
+<tr><td>SaveData</td><td>메타 진행 저장/불러오기</td></tr>
+<tr><td>GameState</td><td>런 상태 관리 (HP, XP, 슬롯, 시그널)</td></tr>
+</table>
+
+<h3>씬 구조</h3>
+<pre>
+scenes/
+  main_menu/MainMenu.tscn       # 메인 메뉴
+  stage_select/StageSelect.tscn  # 스테이지 선택
+  placement/PlacementScreen.tscn # 배치 화면
+  game/
+    Game.tscn                    # 전투 코디네이터
+    castle/Castle.tscn           # 성 + 이동
+    castle/Slot.tscn             # 슬롯
+    units/Hero.tscn              # 영웅 기본
+    units/Facility.tscn          # 시설 기본
+    units/heroes/*.tscn          # 영웅 5종
+    units/facilities/*.tscn      # 시설 5종
+    enemies/Enemy.tscn           # 적 기본
+    enemies/*.tscn               # 적 5종
+    projectiles/Projectile.tscn  # 투사체
+    wave/WaveManager.tscn        # 웨이브 관리
+  ui/
+    HUD.tscn                     # HP, XP, 레벨, 웨이브, 골드
+    LevelUpPopup.tscn            # 레벨업 3선택
+    WaveIntermission.tscn        # 웨이브 정비
+    ResultScreen.tscn            # 클리어/게임오버
+    MetaScreen.tscn              # 영구 업그레이드
+</pre>
+</div>
+
+<div class="section">
+<h2>12. 아트 &amp; 분위기</h2>
+<ul>
+<li><strong>스타일:</strong> 캐주얼 판타지 (클래시로얄 스타일)</li>
+<li><strong>시점:</strong> 탑뷰</li>
+<li><strong>색감:</strong> 밝고 선명한 색상</li>
+<li><strong>현재:</strong> 임시 도형 텍스처 사용 중</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>13. 버전 이력</h2>
+<table>
+<tr><th>버전</th><th>날짜</th><th>변경 사항</th></tr>
+<tr><td>v0.1.0</td><td>2026-05-15</td><td>MVP 완성 - 전체 게임 루프, Stage 1, 보상/게임오버 화면</td></tr>
+</table>
+</div>
+
+</div>
+</body>
+</html>
