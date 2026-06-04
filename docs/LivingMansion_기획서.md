@@ -237,3 +237,28 @@ scenes/
 | 버전 | 날짜 | 변경 사항 |
 |------|------|----------|
 | v0.1.0 | 2026-05-15 | MVP 완성 - 전체 게임 루프, Stage 1, 보상/게임오버 화면 |
+
+<!-- RESOURCE_PREVIEWS_START -->
+## 공유용 이미지 미리보기
+
+> 자동 갱신: 2026-06-04. 공유 시 문서와 함께 아래 이미지 경로가 포함되어야 합니다.
+
+![26_LM arrow](../addons/gut/gui/arrow.png)
+- `addons/gut/gui/arrow.png`
+
+![26_LM play](../addons/gut/gui/play.png)
+- `addons/gut/gui/play.png`
+
+![26_LM icon](../addons/gut/icon.png)
+- `addons/gut/icon.png`
+
+![26_LM GutIconV2_base](../addons/gut/images/GutIconV2_base.png)
+- `addons/gut/images/GutIconV2_base.png`
+
+![26_LM GutIconV2_no_shine](../addons/gut/images/GutIconV2_no_shine.png)
+- `addons/gut/images/GutIconV2_no_shine.png`
+
+![26_LM slot_frame](../assets/art/ui/slot_frame.svg)
+- `assets/art/ui/slot_frame.svg`
+
+<!-- RESOURCE_PREVIEWS_END -->
