@@ -1,3 +1,12 @@
+## 2026-06-18 업데이트: 런타임 SVG 아트 PNG 교체
+
+- 버전: `v0.1.1`
+- 영웅, 적, 시설, 배경, 슬롯 프레임, 투사체, 프로젝트 아이콘의 런타임 SVG 참조를 PNG 비트맵 자산으로 교체했다.
+- `ArtLibrary.gd`는 SVG 문자열 로더 대신 일반 이미지 로더를 사용하며, 배치 화면 아이콘 축소용 scale도 PNG 리사이즈로 처리한다.
+- 기존 1차 런타임 SVG 파일은 제거해 실제 게임 오브젝트가 PNG 자산만 사용하도록 정리했다.
+
+---
+
 # Living Mansion (LM) 기획서
 
 **버전:** v0.1.0
@@ -258,7 +267,7 @@ scenes/
 ![26_LM GutIconV2_no_shine](../addons/gut/images/GutIconV2_no_shine.png)
 - `addons/gut/images/GutIconV2_no_shine.png`
 
-![26_LM slot_frame](../assets/art/ui/slot_frame.svg)
-- `assets/art/ui/slot_frame.svg`
+![26_LM slot_frame](../assets/art/ui/slot_frame.png)
+- `assets/art/ui/slot_frame.png`
 
 <!-- RESOURCE_PREVIEWS_END -->
