@@ -12,5 +12,5 @@ duration = 45.0
 spawn_interval = 1.5
 max_enemies_at_once = 20
 is_boss_wave = false
-enemy_pool = Array[ExtResource("2_gobl"), ExtResource("3_orc"), ExtResource("4_garcher")]
-spawn_weights = PackedFloat32Array(0.5, 0.3, 0.2)
+enemy_pool = Array[EnemyData]([ExtResource("2_gobl"), ExtResource("3_orc"), ExtResource("4_garcher")])
+spawn_weights = Array[float]([0.5, 0.3, 0.2])
