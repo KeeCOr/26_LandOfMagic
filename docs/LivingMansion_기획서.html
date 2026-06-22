@@ -31,6 +31,16 @@
 </head>
 <body>
 <section>
+  <h2>2026-06-22 업데이트: XP 다중 레벨업 보정</h2>
+  <ul>
+    <li>버전: <code>v0.1.1</code></li>
+    <li>큰 XP 보상을 한 번에 획득해도 누적 경험치만큼 여러 번 레벨업되도록 <code>GameState.gain_xp()</code>를 보정했다.</li>
+    <li>보스/후반 웨이브 보상에서 레벨업 선택지가 누락되지 않도록 GUT 테스트 케이스를 추가했다.</li>
+    <li>Windows export 파일명을 <code>LivingMansion_v0.1.1_portable.exe</code>로 맞췄다.</li>
+  </ul>
+</section>
+
+<section>
   <h2>2026-06-18 업데이트: 런타임 SVG 아트 PNG 교체</h2>
   <ul>
     <li>버전: <code>v0.1.1</code></li>
@@ -45,8 +55,8 @@
 
 <h1>Living Mansion (LM) 기획서</h1>
 <div class="meta">
-  <span><strong>버전:</strong> v0.1.0</span>
-  <span><strong>최종 수정:</strong> 2026-05-15</span>
+  <span><strong>버전:</strong> v0.1.1</span>
+  <span><strong>최종 수정:</strong> 2026-06-22</span>
   <span><strong>엔진:</strong> Godot 4.3</span>
   <span><strong>장르:</strong> 뱀서라이크 + 성 디펜스</span>
 </div>
@@ -279,6 +289,7 @@ scenes/
 <h2>13. 버전 이력</h2>
 <table>
 <tr><th>버전</th><th>날짜</th><th>변경 사항</th></tr>
+<tr><td>v0.1.1</td><td>2026-06-22</td><td>XP 다중 레벨업 보정, export 파일명 v0.1.1 정렬, 플레이 미리보기 참조 복구</td></tr>
 <tr><td>v0.1.0</td><td>2026-05-15</td><td>MVP 완성 - 전체 게임 루프, Stage 1, 보상/게임오버 화면</td></tr>
 </table>
 </div>

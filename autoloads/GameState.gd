@@ -42,7 +42,7 @@ func reset_run() -> void:
 func gain_xp(amount: float) -> void:
 	var bonus = 1.0 + SaveData.get_upgrade_value("xp_bonus") * 0.1
 	xp += amount * bonus
-	if xp >= xp_to_next_level:
+	while xp >= xp_to_next_level:
 		xp -= xp_to_next_level
 		xp_to_next_level = floor(xp_to_next_level * 1.2)
 		level += 1
