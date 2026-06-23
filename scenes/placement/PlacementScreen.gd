@@ -70,7 +70,7 @@ func _build_slots() -> void:
 	for i in GameState.slot_count:
 		var btn = Button.new()
 		var slot_data = GameState.slots[i] if i < GameState.slots.size() else {unit_data = null}
-		btn.text = "슬롯 %d: %s" % [i + 1, slot_data.unit_data.display_name if slot_data.unit_data else "비어있음"]
+		btn.text = "슬롯 %d: %s" % [i + 1, slot_data.unit_data.display_name if slot_data.unit_data else "비어 있음"]
 		btn.custom_minimum_size = Vector2(150, 44)
 		btn.pressed.connect(_on_slot_clicked.bind(i))
 		slot_row.add_child(btn)

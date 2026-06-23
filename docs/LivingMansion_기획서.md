@@ -6,6 +6,7 @@
 - Windows export 파일명을 `LivingMansion_v0.1.1_portable.exe`로 맞췄다.
 - Stage 1 wave `.tres`의 Godot 배열 문법을 수정해 export/runtime 로딩 오류를 제거했다.
 - 릴리스 export에서 GUT editor/test 리소스를 제외하고 rcedit 의존 리소스 수정을 비활성화했다.
+- 메인 메뉴/스테이지 선택/배치/메타 업그레이드 화면의 깨진 한국어 UI 텍스트를 복구했다.
 
 ---
 
@@ -256,7 +257,7 @@ scenes/
 
 | 버전 | 날짜 | 변경 사항 |
 |------|------|----------|
-| v0.1.1 | 2026-06-22 | XP 다중 레벨업 보정, Stage 1 wave 리소스 로딩 수정, export 설정 정리, 플레이 미리보기 참조 복구 |
+| v0.1.1 | 2026-06-22 | XP 다중 레벨업 보정, Stage 1 wave 리소스 로딩 수정, export 설정 정리, 주요 UI 한국어 텍스트 복구, 플레이 미리보기 참조 복구 |
 | v0.1.0 | 2026-05-15 | MVP 완성 - 전체 게임 루프, Stage 1, 보상/게임오버 화면 |
 
 <!-- RESOURCE_PREVIEWS_START -->
