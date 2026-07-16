@@ -1,334 +1,92 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Living Mansion (LM) 기획서</title>
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Segoe UI', -apple-system, sans-serif; background: #1a1a2e; color: #e0e0e0; line-height: 1.7; padding: 40px 20px; }
-  .container { max-width: 900px; margin: 0 auto; }
-  h1 { color: #ff6b6b; font-size: 2.2em; margin-bottom: 10px; border-bottom: 3px solid #ff6b6b; padding-bottom: 10px; }
-  h2 { color: #4ecdc4; font-size: 1.5em; margin-top: 40px; margin-bottom: 15px; border-left: 4px solid #4ecdc4; padding-left: 12px; }
-  h3 { color: #ffe66d; font-size: 1.15em; margin-top: 25px; margin-bottom: 10px; }
-  .meta { color: #888; font-size: 0.9em; margin-bottom: 30px; }
-  .meta span { display: inline-block; margin-right: 20px; }
-  .meta strong { color: #aaa; }
-  p { margin-bottom: 12px; }
-  ul, ol { margin-left: 25px; margin-bottom: 12px; }
-  li { margin-bottom: 4px; }
-  table { width: 100%; border-collapse: collapse; margin: 15px 0; background: #16213e; border-radius: 8px; overflow: hidden; }
-  th { background: #0f3460; color: #e94560; padding: 10px 14px; text-align: left; font-weight: 600; }
-  td { padding: 8px 14px; border-top: 1px solid #1a1a3e; }
-  tr:hover td { background: #1a2a5e; }
-  code { background: #0f3460; color: #4ecdc4; padding: 2px 6px; border-radius: 4px; font-size: 0.9em; }
-  pre { background: #0f3460; color: #e0e0e0; padding: 16px; border-radius: 8px; margin: 15px 0; overflow-x: auto; font-size: 0.9em; line-height: 1.5; }
-  .flow-box { background: #16213e; border: 1px solid #0f3460; border-radius: 8px; padding: 20px; margin: 15px 0; text-align: center; font-size: 0.95em; }
-  .flow-box .arrow { color: #e94560; font-weight: bold; }
-  .badge { display: inline-block; background: #e94560; color: #fff; padding: 2px 8px; border-radius: 12px; font-size: 0.8em; margin-left: 6px; }
-  .section { margin-bottom: 30px; }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GDD</title>
+  <style>
+    body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.65;max-width:980px;margin:0 auto;padding:40px 24px;color:#20242a;background:#fafafa}
+    h1{font-size:34px;margin:0 0 8px} h2{font-size:24px;margin-top:34px;border-bottom:1px solid #ddd;padding-bottom:6px} h3{font-size:18px;margin-top:24px}
+    p,li,pre{font-size:15px} li{margin:5px 0} pre{white-space:pre-wrap;background:#fff;border:1px solid #ddd;border-radius:8px;padding:8px 10px}
+    table{border-collapse:collapse;width:100%;margin:12px 0} th,td{border:1px solid #ddd;padding:8px 12px;text-align:left} th{background:#f5f5f5;font-weight:600}
+    .meta{color:#666;font-size:14px;margin-bottom:32px}
+    .loop-box{background:#fff;border:1px solid #ddd;border-radius:8px;padding:16px 20px;font-size:15px;white-space:pre-wrap;line-height:1.8}
+    .checklist{list-style:none;padding-left:0}
+    .checklist li::before{content:"☐ ";font-size:16px}
+    hr{border:none;border-top:1px solid #ddd;margin:28px 0}
+    blockquote{border-left:4px solid #ddd;margin:0;padding:8px 16px;color:#555;background:#f9f9f9;border-radius:0 8px 8px 0}
+    code{background:#f0f0f0;border-radius:4px;padding:2px 5px;font-size:13px}
+  </style>
 </head>
 <body>
-<section>
-  <h2>2026-06-22 업데이트: XP 다중 레벨업 보정</h2>
-  <ul>
-    <li>버전: <code>v0.1.1</code></li>
-    <li>큰 XP 보상을 한 번에 획득해도 누적 경험치만큼 여러 번 레벨업되도록 <code>GameState.gain_xp()</code>를 보정했다.</li>
-    <li>보스/후반 웨이브 보상에서 레벨업 선택지가 누락되지 않도록 GUT 테스트 케이스를 추가했다.</li>
-    <li>Windows export 파일명을 <code>LivingMansion_v0.1.1_portable.exe</code>로 맞췄다.</li>
-    <li>Stage 1 wave <code>.tres</code>의 Godot 배열 문법을 수정해 export/runtime 로딩 오류를 제거했다.</li>
-    <li>릴리스 export에서 GUT editor/test 리소스를 제외하고 rcedit 의존 리소스 수정을 비활성화했다.</li>
-    <li>메인 메뉴/스테이지 선택/배치/메타 업그레이드 화면의 깨진 한국어 UI 텍스트를 복구했다.</li>
-  </ul>
-</section>
-
-<section>
-  <h2>2026-06-18 업데이트: 런타임 SVG 아트 PNG 교체</h2>
-  <ul>
-    <li>버전: <code>v0.1.1</code></li>
-    <li>영웅, 적, 시설, 배경, 슬롯 프레임, 투사체, 프로젝트 아이콘의 런타임 SVG 참조를 PNG 비트맵 자산으로 교체했다.</li>
-    <li><code>ArtLibrary.gd</code>는 SVG 문자열 로더 대신 일반 이미지 로더를 사용한다.</li>
-    <li>기존 1차 런타임 SVG 파일은 제거해 실제 게임 오브젝트가 PNG 자산만 사용하도록 정리했다.</li>
-  </ul>
-</section>
-
-
-<div class="container">
-
-<h1>Living Mansion (LM) 기획서</h1>
-<div class="meta">
-  <span><strong>버전:</strong> v0.1.1</span>
-  <span><strong>최종 수정:</strong> 2026-06-22</span>
-  <span><strong>엔진:</strong> Godot 4.3</span>
-  <span><strong>장르:</strong> 뱀서라이크 + 성 디펜스</span>
-</div>
-
-<div class="section">
-<h2>플레이 미리보기</h2>
-
-<h3>플레이 미리보기</h3>
-<img src="./LivingMansion_gameplay_preview.png" alt="플레이 미리보기" style="max-width:100%;border-radius:8px;margin:12px 0;">
-
-<h2>1. 컨셉 요약</h2>
-<p>살아 움직이는 성(Living Mansion)을 조종하며 사방에서 몰려오는 적을 처치하는 뱀서라이크 게임. 플레이어는 성의 이동 방향을 조종하고, 성 내부 슬롯에 영웅과 시설을 배치해 자동 전투를 수행한다. 스테이지를 클리어하며 메타 영구 업그레이드로 성을 강화해 나간다.</p>
-</div>
-
-<div class="section">
-<h2>2. 핵심 게임 루프</h2>
-<div class="flow-box">
-  [홈 화면] <span class="arrow">&rarr;</span> 스테이지 선택 <span class="arrow">&rarr;</span> [배치 화면] <span class="arrow">&rarr;</span> 전투 시작<br><br>
-  <span class="arrow">&darr;</span><br><br>
-  [전투 (탑뷰)] <span class="arrow">&rarr;</span> 레벨업 시 [3선택 팝업] <span class="arrow">&rarr;</span> 웨이브 클리어 시 [정비 화면]<br><br>
-  <span class="arrow">&darr;</span><br><br>
-  보스 처치 <span class="arrow">&rarr;</span> [보상 화면] <span class="arrow">&rarr;</span> 메타 업그레이드
-</div>
-
-<h3>화면 흐름</h3>
+<p># LivingMansion 기획서</p>
+<blockquote>
+<p>버전 v0.1.2 / 최신화 2026-07-02 KST</p>
+</blockquote>
+<h2>문제 정의</h2>
+<p>방치형 자동 전투와 저택 탐색을 좋아하는 플레이어는 “방을 조사했다 → 단서가 바뀌었다 → 다음 방 선택이 달라졌다”는 첫 루프를 빠르게 이해해야 한다. 기존 문서는 인코딩 손상과 오래된 보류 문구가 섞여 있어, 장르 팬이 현재 구현 상태와 다음 검증 기준을 신뢰하기 어려웠다.</p>
+<h2>한 줄 소개</h2>
+<p>LivingMansion은 저택의 방을 조사하며 단서를 얻고, 그 단서가 다음 방 선택과 성장 판단으로 이어지는 Godot 기반 저택 탐색 어드벤처다.</p>
+<h2>주 페르소나</h2>
+<ul>
+  <li>이름: 이진호</li>
+  <li>나이/직업: 34세 회사원</li>
+  <li>선호 장르: 방치형 자동 전투, 저택 탐색, 짧은 세션의 성장형 로그라이트</li>
+  <li>사용 맥락: 퇴근 후 20~30분 동안 직접 조작을 많이 하지 않고, 방 선택과 단서 변화가 눈에 보이는 게임을 원한다.</li>
+</ul>
+<h2>핵심 루프</h2>
+<p>플레이어가 첫 방을 선택한다 → 오브젝트를 조사한다 → 단서/관계/이벤트 상태가 갱신된다 → 다음 방 후보와 위험이 바뀐다 → 다시 방을 선택한다.</p>
+<h2>첫 3분 플레이 흐름</h2>
+<ol>
+  <li>시작 방에서 조사 가능한 오브젝트 1~2개를 확인한다.</li>
+  <li>오브젝트를 조사하면 새 단서와 상태 변화가 짧게 표시된다.</li>
+  <li>단서 변화로 다음 방 후보의 위험/보상 설명이 바뀐다.</li>
+  <li>플레이어는 다음 방을 고르거나, 현재 방을 더 조사할지 선택한다.</li>
+</ol>
+<h2>현재 구현/검증 상태</h2>
 <table>
-<tr><th>화면</th><th>설명</th></tr>
-<tr><td>MainMenu</td><td>게임 시작, 업그레이드, 종료</td></tr>
-<tr><td>StageSelect</td><td>스테이지 선택 (잠금 해제 기반)</td></tr>
-<tr><td>PlacementScreen</td><td>전투 전 영웅/시설 슬롯 배치</td></tr>
-<tr><td>Game (전투)</td><td>탑뷰 자동 전투, WASD 이동</td></tr>
-<tr><td>LevelUpPopup</td><td>레벨업 시 3선택지 (전투 일시정지)</td></tr>
-<tr><td>WaveIntermission</td><td>웨이브 사이 정비 시간 (15초 자동 시작)</td></tr>
-<tr><td>ResultScreen</td><td>스테이지 클리어/게임 오버 결과</td></tr>
-<tr><td>MetaScreen</td><td>영구 업그레이드 구매</td></tr>
+  <thead><tr><th>항목</th><th>상태</th><th>근거</th></tr></thead>
+  <tbody>
+    <tr><td>Godot 프로젝트 기준</td><td>확인</td><td><code>project.godot</code>, <code>scenes/</code>, <code>scripts/</code>, <code>autoloads/</code>, <code>tests/</code></td></tr>
+    <tr><td>Windows portable</td><td>확인</td><td><code>LivingMansion_v0.1.2_portable.exe</code> 존재</td></tr>
+    <tr><td>GUT 테스트</td><td>통과</td><td>2026-07-02 Godot 4.7 headless GUT: 2 scripts / 10 tests / 21 asserts 통과</td></tr>
+    <tr><td>XP 레벨업 신호 테스트</td><td>수정/통과</td><td>지역 변수 클로저 대신 테스트 인스턴스 카운터로 신호 수신 검증</td></tr>
+    <tr><td>첫 방 루프 체감 검증</td><td>미완료</td><td>10인 프로토타입 테스트 필요</td></tr>
+    <tr><td>문서 가독성</td><td>개선</td><td>현재 GDD/update/persona 문서를 UTF-8 한국어로 재작성</td></tr>
+  </tbody>
 </table>
-</div>
-
-<div class="section">
-<h2>3. 스테이지 구성</h2>
+<h2>2026-07-02 재테스트 반영</h2>
 <ul>
-<li>스테이지당 <strong>3~5 웨이브 + 보스 웨이브</strong></li>
-<li>웨이브 진행에 따라 적 밀도와 종류 증가</li>
-<li>스테이지 클리어 시 다음 스테이지 잠금 해제</li>
-<li>런 실패 시 해당 스테이지 처음부터 재시작 (메타 업그레이드는 유지)</li>
+  <li>Godot 4.7 headless 환경에서 GUT 테스트를 실행했다.</li>
+  <li>최초 실행에서는 <code>level_up_triggered</code> 신호 테스트 2개가 실패했다.</li>
+  <li>원인은 런타임 <code>GameState.gain_xp()</code>가 아니라, 테스트가 지역 변수 클로저에 의존해 신호 수신 횟수를 안정적으로 잡지 못하는 구조였다.</li>
+  <li><code>tests/test_game_state.gd</code>를 테스트 인스턴스 필드 기반 수신기로 고쳐 신호 발생을 실제로 검증하도록 정리했다.</li>
+  <li>재실행 결과 10/10 테스트가 통과했다.</li>
 </ul>
-
-<h3>Stage 1 웨이브 구성</h3>
+<h2>10인 프로토타입 테스트 기준</h2>
 <table>
-<tr><th>웨이브</th><th>시간</th><th>스폰 간격</th><th>적 구성</th><th>최대 동시 적</th></tr>
-<tr><td>Wave 1</td><td>35초</td><td>2.5초</td><td>고블린 100%</td><td>15</td></tr>
-<tr><td>Wave 2</td><td>40초</td><td>2.0초</td><td>고블린 70% + 오크 30%</td><td>18</td></tr>
-<tr><td>Wave 3</td><td>45초</td><td>1.5초</td><td>고블린 50% + 오크 30% + 고블린궁수 20%</td><td>20</td></tr>
-<tr><td>Boss</td><td>120초</td><td>5.0초</td><td>보스 20% + 고블린 80%</td><td>10</td></tr>
+  <thead><tr><th>항목</th><th>측정 방법</th><th>통과 기준</th></tr></thead>
+  <tbody>
+    <tr><td>첫 단서 이해</td><td>첫 방 조사 후 “무엇이 바뀌었는가?”를 말하게 한다</td><td>10명 중 7명 이상이 단서/상태 변화를 말함</td></tr>
+    <tr><td>다음 방 선택 이유</td><td>다음 방 선택 전 이유를 말하게 한다</td><td>10명 중 6명 이상이 단서/위험/보상 중 하나를 근거로 말함</td></tr>
+    <tr><td>조작 부담</td><td>첫 3분 동안 막힌 지점 기록</td><td>같은 지점에서 3명 이상 막히지 않음</td></tr>
+    <tr><td>반복 의향</td><td>첫 방 루프 후 “다음 방을 보고 싶은가?” 5점 척도</td><td>평균 3.5점 이상</td></tr>
+  </tbody>
 </table>
-</div>
-
-<div class="section">
-<h2>4. 성 &amp; 슬롯 시스템</h2>
-<h3>4.1 성 구조</h3>
-<ul>
-<li>탑뷰에서 WASD로 이동하는 거대 유닛 (속도: 120)</li>
-<li>내부에 <strong>선형으로 나열된 슬롯</strong> 존재</li>
-<li>기본 슬롯: <strong>3개</strong>, 메타 업그레이드로 최대 <strong>6~7개</strong></li>
-<li>성 전체 HP가 0이 되면 게임 오버</li>
-</ul>
-
-<h3>4.2 슬롯 규칙</h3>
-<ul>
-<li>각 슬롯에 영웅 또는 시설 중 하나 배치</li>
-<li>빈 슬롯은 전투에 기여하지 않음</li>
-<li>슬롯 추가는 메타 업그레이드에서만 가능</li>
-</ul>
-</div>
-
-<div class="section">
-<h2>5. 영웅 시스템</h2>
+<h2>빌드/검증 명령</h2>
 <table>
-<tr><th>영웅</th><th>역할</th><th>데미지</th><th>공격속도</th><th>사거리</th><th>특성</th></tr>
-<tr><td>궁수 (Archer)</td><td>단일 원거리</td><td>12</td><td>1.2/초</td><td>220</td><td>빠른 공격, 투사체 발사</td></tr>
-<tr><td>마법사 (Mage)</td><td>광역 원거리</td><td>18</td><td>0.7/초</td><td>250</td><td>최대 5체 동시 공격 (70%)</td></tr>
-<tr><td>기사 (Knight)</td><td>근접 방어</td><td>20</td><td>0.9/초</td><td>70</td><td>투사체 없이 직접 타격</td></tr>
-<tr><td>성직자 (Priest)</td><td>지원 힐</td><td>8 (힐량)</td><td>0.5/초</td><td>-</td><td>성 HP 회복</td></tr>
-<tr><td>연금술사 (Alchemist)</td><td>자원 생성</td><td>5 (골드)</td><td>0.3/초</td><td>-</td><td>주기적 골드 생성</td></tr>
+  <thead><tr><th>목적</th><th>명령</th><th>최근 결과</th></tr></thead>
+  <tbody>
+    <tr><td>GUT 테스트</td><td><code>Godot_v4.7-stable_win64.exe --headless --path C:\Development\26_LM -s res://addons/gut/gut_cmdln.gd -gdir=res://tests -gexit</code></td><td>2026-07-02: 10/10 통과</td></tr>
+    <tr><td>Windows export</td><td>Godot export preset <code>Windows Desktop</code></td><td>v0.1.2 portable 존재</td></tr>
+  </tbody>
 </table>
+<h2>남은 리스크와 다음 우선순위</h2>
+<ol>
+  <li>첫 방 루프는 테스트로 일부 시스템만 검증됐고, 실제 플레이어가 단서 변화를 이해하는지는 아직 10인 프로토타입 테스트가 필요하다.</li>
+  <li>Godot headless 테스트는 샌드박스 내부에서는 사용자 로그 경로 문제로 크래시했으므로, 검증 시에는 승인된 외부 실행 또는 사용자 로그 경로 접근이 필요하다.</li>
+  <li>다음 개선은 런타임 기능 추가보다 첫 방 루프의 단서 변화, 다음 방 위험/보상 문구, 플레이어 선택 이유를 실제 관찰하는 것이다.</li>
+</ol>
 
-<h3>영웅 성장</h3>
-<ul>
-<li>레벨업 선택지에서 업그레이드 가능</li>
-<li>레벨당 데미지 +15%, 사거리 +5%</li>
-<li>메타 업그레이드로 초기 레벨 보정 가능</li>
-</ul>
-</div>
-
-<div class="section">
-<h2>6. 시설 시스템</h2>
-<table>
-<tr><th>시설</th><th>역할</th><th>데미지</th><th>공격속도</th><th>사거리</th><th>최대 레벨</th></tr>
-<tr><td>석궁 포탑 (Crossbow)</td><td>단일 원거리</td><td>8</td><td>1.8/초</td><td>200</td><td>3</td></tr>
-<tr><td>화염 투석기 (Catapult)</td><td>광역 원거리</td><td>25</td><td>0.4/초</td><td>280</td><td>3</td></tr>
-<tr><td>가시 방벽 (SpikeFence)</td><td>근접 반사</td><td>6</td><td>2.0/초</td><td>60</td><td>3</td></tr>
-<tr><td>치료 분수 (HealingFountain)</td><td>성 힐</td><td>5 (힐)</td><td>0.5/초</td><td>-</td><td>3</td></tr>
-<tr><td>마나 오브 (ManaOrb)</td><td>경험치 버프</td><td>-</td><td>1.0/초</td><td>-</td><td>3</td></tr>
-</table>
-
-<h3>시설 업그레이드</h3>
-<ul>
-<li>레벨당 데미지 +20%</li>
-<li>최대 3레벨까지 업그레이드</li>
-</ul>
-</div>
-
-<div class="section">
-<h2>7. 전투 시스템</h2>
-<h3>7.1 성 이동</h3>
-<ul>
-<li><strong>WASD / 방향키</strong>로 이동 방향 조종</li>
-<li>일정 속도(120)로 즉각 반응 이동</li>
-<li>적과 충돌 시 성이 데미지를 받음</li>
-</ul>
-
-<h3>7.2 자동 공격</h3>
-<ul>
-<li>배치된 영웅/시설이 사거리 내 적을 자동 타겟팅</li>
-<li>기본 타겟팅: 가장 가까운 적</li>
-</ul>
-
-<h3>7.3 레벨업 시스템</h3>
-<ul>
-<li>적 처치 시 경험치 획득 (xp_bonus 메타 업그레이드로 보정)</li>
-<li>레벨업 시 <strong>전투 일시정지 + 3선택지</strong> 팝업</li>
-<li>필요 경험치: 10부터 시작, 레벨당 x1.2 증가</li>
-</ul>
-
-<h3>7.4 웨이브 사이 정비</h3>
-<ul>
-<li>웨이브 클리어 후 <strong>15초</strong> 정비 시간 (자동 시작)</li>
-<li>웨이브 클리어 보상: 골드 +50</li>
-</ul>
-</div>
-
-<div class="section">
-<h2>8. 적 시스템</h2>
-<table>
-<tr><th>적</th><th>HP</th><th>이동속도</th><th>데미지</th><th>사거리</th><th>경험치</th><th>특성</th></tr>
-<tr><td>고블린</td><td>20</td><td>120</td><td>4</td><td>55</td><td>1</td><td>빠르고 약함</td></tr>
-<tr><td>오크 전사</td><td>80</td><td>55</td><td>12</td><td>60</td><td>3</td><td>느리고 강함</td></tr>
-<tr><td>고블린 궁수</td><td>25</td><td>70</td><td>6</td><td>250</td><td>2</td><td>원거리 투사체</td></tr>
-<tr><td>트롤</td><td>150</td><td>45</td><td>18 (x1.5)</td><td>65</td><td>5</td><td>광역 1.5배</td></tr>
-<tr><td>보스 (S1)</td><td>500</td><td>60</td><td>20</td><td>65</td><td>20</td><td>HP 50% 이하 시 속도 1.5배</td></tr>
-</table>
-
-<h3>스폰 방식</h3>
-<ul>
-<li>성 위치 기준 500~600 거리의 랜덤 방향에서 스폰</li>
-<li>가중치 기반 랜덤 적 선택</li>
-</ul>
-</div>
-
-<div class="section">
-<h2>9. 메타 영구 업그레이드</h2>
-<p>스테이지 클리어 골드(200G)로 구매. 런 간 영구 유지.</p>
-<table>
-<tr><th>업그레이드</th><th>효과</th><th>비용</th><th>최대 레벨</th><th>레벨당 효과</th></tr>
-<tr><td>슬롯 확장</td><td>슬롯 +1</td><td>150G</td><td>3</td><td>+1 슬롯</td></tr>
-<tr><td>성 HP 강화</td><td>최대 HP 증가</td><td>100G</td><td>3</td><td>+10 HP</td></tr>
-<tr><td>초기 골드</td><td>시작 골드 증가</td><td>80G</td><td>3</td><td>+50G</td></tr>
-<tr><td>영웅 초기 레벨</td><td>영웅 시작 레벨 +1</td><td>200G</td><td>3</td><td>+1 레벨</td></tr>
-<tr><td>경험치 보너스</td><td>적 처치 경험치 증가</td><td>120G</td><td>3</td><td>+10%</td></tr>
-<tr><td>시설 할인</td><td>시설 비용 감소</td><td>100G</td><td>3</td><td>-10%</td></tr>
-</table>
-</div>
-
-<div class="section">
-<h2>10. 세이브 시스템</h2>
-<ul>
-<li>저장 경로: <code>user://lm_save.json</code></li>
-<li>저장 항목: 메타 업그레이드 레벨, 해금된 스테이지, 보유 골드</li>
-<li>업그레이드 구매 시 자동 저장</li>
-</ul>
-</div>
-
-<div class="section">
-<h2>11. 기술 구조</h2>
-<h3>오토로드</h3>
-<table>
-<tr><th>이름</th><th>역할</th></tr>
-<tr><td>SaveData</td><td>메타 진행 저장/불러오기</td></tr>
-<tr><td>GameState</td><td>런 상태 관리 (HP, XP, 슬롯, 시그널)</td></tr>
-</table>
-
-<h3>씬 구조</h3>
-<pre>
-scenes/
-  main_menu/MainMenu.tscn       # 메인 메뉴
-  stage_select/StageSelect.tscn  # 스테이지 선택
-  placement/PlacementScreen.tscn # 배치 화면
-  game/
-    Game.tscn                    # 전투 코디네이터
-    castle/Castle.tscn           # 성 + 이동
-    castle/Slot.tscn             # 슬롯
-    units/Hero.tscn              # 영웅 기본
-    units/Facility.tscn          # 시설 기본
-    units/heroes/*.tscn          # 영웅 5종
-    units/facilities/*.tscn      # 시설 5종
-    enemies/Enemy.tscn           # 적 기본
-    enemies/*.tscn               # 적 5종
-    projectiles/Projectile.tscn  # 투사체
-    wave/WaveManager.tscn        # 웨이브 관리
-  ui/
-    HUD.tscn                     # HP, XP, 레벨, 웨이브, 골드
-    LevelUpPopup.tscn            # 레벨업 3선택
-    WaveIntermission.tscn        # 웨이브 정비
-    ResultScreen.tscn            # 클리어/게임오버
-    MetaScreen.tscn              # 영구 업그레이드
-</pre>
-</div>
-
-<div class="section">
-<h2>12. 아트 &amp; 분위기</h2>
-<ul>
-<li><strong>스타일:</strong> 캐주얼 판타지 (클래시로얄 스타일)</li>
-<li><strong>시점:</strong> 탑뷰</li>
-<li><strong>색감:</strong> 밝고 선명한 색상</li>
-<li><strong>현재:</strong> 임시 도형 텍스처 사용 중</li>
-</ul>
-</div>
-
-<div class="section">
-<h2>13. 버전 이력</h2>
-<table>
-<tr><th>버전</th><th>날짜</th><th>변경 사항</th></tr>
-<tr><td>v0.1.1</td><td>2026-06-22</td><td>XP 다중 레벨업 보정, Stage 1 wave 리소스 로딩 수정, export 설정 정리, 주요 UI 한국어 텍스트 복구, 플레이 미리보기 참조 복구</td></tr>
-<tr><td>v0.1.0</td><td>2026-05-15</td><td>MVP 완성 - 전체 게임 루프, Stage 1, 보상/게임오버 화면</td></tr>
-</table>
-</div>
-
-</div>
-<!-- RESOURCE_PREVIEWS_START -->
-<section class="resource-previews">
-  <h2>공유용 이미지 미리보기</h2>
-  <p>자동 갱신: 2026-06-04. 공유 시 문서와 함께 아래 이미지 경로가 포함되어야 합니다.</p>
-  <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:flex-start;">
-<figure style="margin:12px 0;padding:12px;border:1px solid #e5e7eb;border-radius:8px;background:#fff;">
-  <img src="../addons/gut/gui/arrow.png" alt="26_LM arrow" style="max-width:220px;max-height:160px;width:auto;height:auto;object-fit:contain;display:block;" />
-  <figcaption style="margin-top:8px;font-size:13px;color:#4b5563;"><code>addons/gut/gui/arrow.png</code></figcaption>
-</figure>
-<figure style="margin:12px 0;padding:12px;border:1px solid #e5e7eb;border-radius:8px;background:#fff;">
-  <img src="../addons/gut/gui/play.png" alt="26_LM play" style="max-width:220px;max-height:160px;width:auto;height:auto;object-fit:contain;display:block;" />
-  <figcaption style="margin-top:8px;font-size:13px;color:#4b5563;"><code>addons/gut/gui/play.png</code></figcaption>
-</figure>
-<figure style="margin:12px 0;padding:12px;border:1px solid #e5e7eb;border-radius:8px;background:#fff;">
-  <img src="../addons/gut/icon.png" alt="26_LM icon" style="max-width:220px;max-height:160px;width:auto;height:auto;object-fit:contain;display:block;" />
-  <figcaption style="margin-top:8px;font-size:13px;color:#4b5563;"><code>addons/gut/icon.png</code></figcaption>
-</figure>
-<figure style="margin:12px 0;padding:12px;border:1px solid #e5e7eb;border-radius:8px;background:#fff;">
-  <img src="../addons/gut/images/GutIconV2_base.png" alt="26_LM GutIconV2_base" style="max-width:220px;max-height:160px;width:auto;height:auto;object-fit:contain;display:block;" />
-  <figcaption style="margin-top:8px;font-size:13px;color:#4b5563;"><code>addons/gut/images/GutIconV2_base.png</code></figcaption>
-</figure>
-<figure style="margin:12px 0;padding:12px;border:1px solid #e5e7eb;border-radius:8px;background:#fff;">
-  <img src="../addons/gut/images/GutIconV2_no_shine.png" alt="26_LM GutIconV2_no_shine" style="max-width:220px;max-height:160px;width:auto;height:auto;object-fit:contain;display:block;" />
-  <figcaption style="margin-top:8px;font-size:13px;color:#4b5563;"><code>addons/gut/images/GutIconV2_no_shine.png</code></figcaption>
-</figure>
-<figure style="margin:12px 0;padding:12px;border:1px solid #e5e7eb;border-radius:8px;background:#fff;">
-  <img src="../assets/art/ui/slot_frame.png" alt="26_LM slot_frame" style="max-width:220px;max-height:160px;width:auto;height:auto;object-fit:contain;display:block;" />
-  <figcaption style="margin-top:8px;font-size:13px;color:#4b5563;"><code>assets/art/ui/slot_frame.png</code></figcaption>
-</figure>
-  </div>
-</section>
-<!-- RESOURCE_PREVIEWS_END -->
 </body>
 </html>

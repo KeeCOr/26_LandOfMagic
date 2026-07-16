@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LivingMansion 업데이트 내역서</title>
+<style>
+body{margin:0;background:#fbfbfd;color:#171923;font-family:"Malgun Gothic","Apple SD Gothic Neo",Arial,sans-serif;line-height:1.65}main{max-width:920px;margin:0 auto;padding:36px 22px 64px}h1{font-size:30px;margin:0 0 20px}h2{font-size:20px;margin:30px 0 10px;padding-top:12px;border-top:2px solid #2f3b4e;color:#2f3b4e}li{margin:6px 0}code{background:#edf1f7;border:1px solid #d9e1ee;border-radius:4px;padding:1px 5px}@media(max-width:720px){main{padding:24px 14px}h1{font-size:25px}}
+</style>
+</head>
+<body><main>
+<h1>LivingMansion 업데이트 내역서</h1>
+<h2>2026-07-16 v0.1.2 Release Hygiene</h2>
+<ul>
+<li>현재 Codex 세션에서는 Godot 실행 파일이 PATH와 일반 설치 경로에서 발견되지 않아 GUT 테스트와 export를 새로 실행하지 못했다.</li>
+<li>기존 <code>LivingMansion_v0.1.2_portable.exe</code> 산출물의 root/release/Drive 배치를 확인하고, 예전 v0.1.1 실행파일은 Git 추적에서 제거하는 방향으로 정리했다.</li>
+<li>산출물은 Git이 아니라 로컬 프로젝트 루트, <code>release/</code>, Google Drive 실행파일 폴더에 유지한다.</li>
+</ul>
+<h2>2026-07-02 v0.1.2 Persona Retest And GUT Repair</h2>
+<ul>
+<li>Re-ran Godot 4.7 headless GUT tests for the current persona retest wave.</li>
+<li>Initial result: 8/10 passing; two <code>level_up_triggered</code> signal tests failed because the tests used local-variable closures that did not reliably capture signal callbacks.</li>
+<li>Updated <code>tests/test_game_state.gd</code> to use a test-instance counter receiver for <code>level_up_triggered</code>.</li>
+<li>Final result: 2 scripts / 10 tests / 21 asserts passing.</li>
+<li>Rewrote the current GDD/update/persona docs into readable UTF-8 Korean and added a 10-person first-room prototype rubric.</li>
+</ul>
+<h2>2026-06-29 v0.1.2 Mansion Runtime Art Refresh</h2>
+<ul>
+<li>Replaced <code>assets/art/environment/mansion.png</code> at the existing runtime path.</li>
+<li>Preserved the 192x160 source dimensions and existing Godot <code>.import</code> file/UID so Castle.gd continues loading the same resource without scene rewiring.</li>
+<li>Visual intent: clearer haunted mansion silhouette, lit windows, moonlit defensive-base read, and stronger contrast at in-game sprite scale.</li>
+<li>Validation: PNG dimensions verified as 192x160; <code>mansion.png.import</code> still points to the same source file. Godot 4.7 CLI and Windows export templates were installed; <code>LivingMansion_v0.1.2_portable.exe</code> was exported successfully on 2026-06-30.</li>
+</ul>
+
+</main></body>
+</html>
