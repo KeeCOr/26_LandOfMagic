@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://troll0001"]
+
+[ext_resource type="PackedScene" uid="uid://enemy00001" path="res://scenes/game/enemies/Enemy.tscn" id="1_trol1"]
+[ext_resource type="Script" path="res://scenes/game/enemies/Troll.gd" id="2_trol2"]
+
+[node name="Troll" instance=ExtResource("1_trol1")]
+script = ExtResource("2_trol2")

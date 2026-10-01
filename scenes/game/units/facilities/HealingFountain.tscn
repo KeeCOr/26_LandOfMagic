@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://healfnt01"]
+
+[ext_resource type="PackedScene" uid="uid://facility001" path="res://scenes/game/units/Facility.tscn" id="1_heal01"]
+[ext_resource type="Script" path="res://scenes/game/units/facilities/HealingFountain.gd" id="2_heal02"]
+
+[node name="HealingFountain" instance=ExtResource("1_heal01")]
+script = ExtResource("2_heal02")

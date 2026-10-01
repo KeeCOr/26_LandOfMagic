@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://manaorb01"]
+
+[ext_resource type="PackedScene" uid="uid://facility001" path="res://scenes/game/units/Facility.tscn" id="1_mano01"]
+[ext_resource type="Script" path="res://scenes/game/units/facilities/ManaOrb.gd" id="2_mano02"]
+
+[node name="ManaOrb" instance=ExtResource("1_mano01")]
+script = ExtResource("2_mano02")

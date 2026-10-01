@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="HeroData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/resources/HeroData.gd" id="1_herodat"]
+
+[resource]
+script = ExtResource("1_herodat")
+id = "archer"
+display_name = "궁수"
+scene_path = "res://scenes/game/units/heroes/Archer.tscn"
+damage = 12.0
+attack_speed = 1.2
+attack_range = 220.0
+description = "빠른 단일 원거리 공격"

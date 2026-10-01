@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://crossbow01"]
+
+[ext_resource type="PackedScene" uid="uid://facility001" path="res://scenes/game/units/Facility.tscn" id="1_cross1"]
+[ext_resource type="Script" path="res://scenes/game/units/facilities/Crossbow.gd" id="2_cross2"]
+
+[node name="Crossbow" instance=ExtResource("1_cross1")]
+script = ExtResource("2_cross2")

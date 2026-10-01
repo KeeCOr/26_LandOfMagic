@@ -1,0 +1,7 @@
+.godot/
+*.import
+*.translation
+*.converted.scn
+export_presets.cfg
+*.exe
+release/

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="MetaUpgradeData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/resources/MetaUpgradeData.gd" id="1_mupg"]
+
+[resource]
+script = ExtResource("1_mupg")
+id = "facility_discount"
+display_name = "시설 할인"
+description = "시설 비용 -10%"
+cost = 100
+max_level = 3
+upgrade_type = "facility_discount"
+value_per_level = 1.0

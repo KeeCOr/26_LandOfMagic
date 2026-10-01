@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://slot00001"]
+
+[ext_resource type="Script" path="res://scenes/game/castle/Slot.gd" id="1_slot01"]
+
+[node name="Slot" type="Node2D"]
+script = ExtResource("1_slot01")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="UnitContainer" type="Node2D" parent="."]

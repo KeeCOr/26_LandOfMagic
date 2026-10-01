@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://mage00001"]
+
+[ext_resource type="PackedScene" uid="uid://hero000001" path="res://scenes/game/units/Hero.tscn" id="1_mage01"]
+[ext_resource type="Script" path="res://scenes/game/units/heroes/Mage.gd" id="2_mage02"]
+
+[node name="Mage" instance=ExtResource("1_mage01")]
+script = ExtResource("2_mage02")
