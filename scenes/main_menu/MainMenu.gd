@@ -11,7 +11,7 @@ const Art = preload("res://scripts/ArtLibrary.gd")
 
 func _ready() -> void:
 	_setup_art()
-	play_button.pressed.connect(func(): get_tree().change_scene_to_file("res://scenes/stage_select/StageSelect.tscn"))
+	play_button.pressed.connect(func(): get_tree().change_scene_to_file("res://scenes/exploration/MansionExploration.tscn"))
 	upgrade_button.pressed.connect(func(): get_tree().change_scene_to_file("res://scenes/ui/MetaScreen.tscn"))
 	quit_button.pressed.connect(func(): get_tree().quit())
 

@@ -54,3 +54,18 @@ func test_reset_run_initializes_slots() -> void:
 	assert_eq(GameState.slots.size(), 3)
 	for slot in GameState.slots:
 		assert_null(slot.unit_data)
+
+func test_clue_updates_relationship_and_unlocks_next_choice() -> void:
+	GameState.reset_exploration()
+	var result := GameState.discover_clue("torn_letter", "찢긴 편지", 5, "서재")
+	assert_eq(GameState.relationship, 55)
+	assert_true(GameState.discovered_clues.has("torn_letter"))
+	assert_eq(result.next_choice, "서재")
+	assert_false(result.already_discovered)
+
+func test_clue_cannot_be_collected_twice() -> void:
+	GameState.reset_exploration()
+	GameState.discover_clue("torn_letter", "찢긴 편지", 5, "서재")
+	var duplicate := GameState.discover_clue("torn_letter", "찢긴 편지", 5, "서재")
+	assert_eq(GameState.relationship, 55)
+	assert_true(duplicate.already_discovered)
