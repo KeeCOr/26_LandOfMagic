@@ -13,6 +13,7 @@ config/icon="res://icon.png"
 
 SaveData="*res://autoloads/SaveData.gd"
 GameState="*res://autoloads/GameState.gd"
+AudioManager="*res://autoloads/AudioManager.gd"
 
 [input]
 

@@ -39,6 +39,7 @@ func _setup_slots() -> void:
 
 func take_damage(amount: float) -> void:
 	GameState.take_castle_damage(amount)
+	AudioManager.play_impact()
 
 func heal(amount: float) -> void:
 	GameState.heal_castle(amount)

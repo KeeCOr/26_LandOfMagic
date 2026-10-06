@@ -14,6 +14,9 @@ func save() -> void:
 		"total_gold": total_gold
 	}
 	var file = FileAccess.open(SAVE_PATH, FileAccess.WRITE)
+	if file == null:
+		push_warning("Could not open LivingMansion save file for writing")
+		return
 	file.store_string(JSON.stringify(data))
 	file.close()
 

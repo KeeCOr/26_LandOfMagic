@@ -48,6 +48,7 @@ func _do_attack() -> void:
 
 func take_damage(amount: float) -> void:
 	hp -= amount
+	AudioManager.play_impact()
 	if health_bar:
 		health_bar.value = hp
 	if hp <= 0.0:

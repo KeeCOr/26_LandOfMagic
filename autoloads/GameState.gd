@@ -66,6 +66,9 @@ func discover_clue(clue_id: String, clue_name: String, relationship_delta: int, 
 	consequence["already_discovered"] = false
 	discovered_clues.append(clue_id)
 	relationship = clampi(relationship + relationship_delta, 0, 100)
+	var audio_manager := get_node_or_null("/root/AudioManager")
+	if audio_manager:
+		audio_manager.play_clue_discovered()
 	emit_signal("clue_discovered", consequence)
 	return consequence
 

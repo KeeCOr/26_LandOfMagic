@@ -16,6 +16,7 @@ func init(dmg: float, spd: float, dir: Vector2, tgt: Node2D = null) -> void:
 	speed = spd
 	direction = dir.normalized()
 	target = tgt
+	AudioManager.play_projectile_launch()
 
 func _ready() -> void:
 	Art.apply_sprite(sprite, Art.ENVIRONMENT_ART["projectile"])
