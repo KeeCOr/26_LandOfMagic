@@ -2,6 +2,7 @@
 extends Control
 
 const Art = preload("res://scripts/ArtLibrary.gd")
+const TITLE_LOGO = preload("res://assets/brand/title-logo.png")
 
 @onready var play_button: Button = $VBoxContainer/PlayButton
 @onready var upgrade_button: Button = $VBoxContainer/UpgradeButton
@@ -32,7 +33,15 @@ func _setup_art() -> void:
 	add_child(shade)
 	move_child(shade, 1)
 
-	title_label.text = "Living Mansion"
+	title_label.visible = false
+	var title_logo := TextureRect.new()
+	title_logo.name = "TitleLogo"
+	title_logo.texture = TITLE_LOGO
+	title_logo.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	title_logo.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	title_logo.custom_minimum_size = Vector2(300, 80)
+	menu_box.add_child(title_logo)
+	menu_box.move_child(title_logo, 0)
 	title_label.add_theme_font_size_override("font_size", 44)
 	title_label.add_theme_color_override("font_color", Color(1.0, 0.89, 0.56))
 	title_label.add_theme_color_override("font_shadow_color", Color(0.05, 0.04, 0.04, 0.95))
