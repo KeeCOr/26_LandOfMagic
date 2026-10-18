@@ -1,0 +1,1 @@
+{"project":"26_LM","bgmIntegration":{"date":"2026-10-18","source":"assets/audio/bgm_main_loop.ogg","runtime":"autoloads/AudioManager.gd","reason":"기존 BGM을 지속 오토로드에 연결. 첫 입력 후 반복 재생."}}
